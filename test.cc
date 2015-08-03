@@ -5,9 +5,8 @@ using std::cout;
 using std::endl;
 
 int main(){
- Vector2<double>  vec(1, 1);
- cout << vec << " " << vec.length() << endl;
- vec.normalize();
- cout << vec << " " << vec.length() << endl;
+ Vector2<double> Vec2(1, 1);
+ Vector3<double> Vec3(1, 2, 1);
+ cout << Vec3 << endl;
  return 0;
 }

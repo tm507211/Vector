@@ -11,7 +11,6 @@
 
 namespace CM {
 
-
 /***************************************************************************************
   Vector2  -- 2-D vector class
 ***************************************************************************************/
@@ -144,9 +143,8 @@ std::ostream& operator << (std::ostream& outs, const Vector2<T>& v){
  outs << "<" << v.x << ", " << v.y << ">";
  return outs;
 }
-
 template <class T>
-std::istream& operator << (std::istream& ins, const Vector2<T>& v){
+std::istream& operator >> (std::istream& ins, Vector2<T>& v){
  ins >> v.x >> v.y;
  return ins;
 }
@@ -154,5 +152,43 @@ std::istream& operator << (std::istream& ins, const Vector2<T>& v){
 /*********************************************************************************
  Vector3 -- 3D vector
 *********************************************************************************/
+template <class T>
+class Vector3{
+ public:
+  T x;
+  T y;
+  T z;
 
+  Vector3(const T& s = T()):x(s), y(s), z(s){}
+  Vector3(const T& x, const T& y, const T& z):x(x), y(y), z(z){}
+  Vector3(const Vector3<T>& v):x(v.x), y(v.y), z(v.z){}
+
+  bool operator == (const Vector3<T>& v) const{
+    return x == v.x && y == v.y && z == v.z;
+  }
+  bool operator != (const Vector3<T>& v) const{
+    return x != v.x || y != v.y || z != v.z;
+  }
+};
+
+template <class T>
+T dot(const Vector3<T>& v1, const Vector3<T>& v2){
+ return v1.dot(v2);
 }
+template <class T>
+Vector3<T> cross(const Vector3<T>& v1, const Vector3<T>& v2){
+ return v1.cross(v2);
+}
+
+template <class T>
+std::ostream& operator << (std::ostream& outs, const Vector3<T>& v){
+ outs << "<" << v.x << ", " << v.y << ", " << v.z << ">";
+ return outs;
+}
+template <class T>
+std::istream& operator >> (std::istream& ins, Vector3<T>& v){
+ ins >> v.x >> v.y >> v.z;
+ return ins;
+}
+
+} // end CM namespace
