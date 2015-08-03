@@ -113,7 +113,7 @@ class Vector2{
     return x * x + y * y;
   }
   Vector2<T>& normalize(){
-    T length = length();
+    T length = this->length();
     x /= length;
     y /= length;
     return *this;
@@ -147,7 +147,8 @@ std::ostream& operator << (std::ostream& outs, const Vector2<T>& v){
 
 template <class T>
 std::istream& operator << (std::istream& ins, const Vector2<T>& v){
-  ins >> v.x >> v.y;
+ ins >> v.x >> v.y;
+ return ins;
 }
 
 /*********************************************************************************
