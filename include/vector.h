@@ -134,6 +134,26 @@ Vector2<T> operator * (T s, const Vector2<T>& v){
   return Vector2<T>(s * v.x, s * v.y);
 }
 
+/********************************************************
+ Basic Trig functions of angle between vectors
+********************************************************/
+template <class T>
+T cos(const Vector2<T>& v1, const Vector2<T>& v2){
+  return dot(v1, v2) / v1.length() / v2.length();
+}
+template <class T>
+T sin(const Vector2<T>& v1, const Vector2<T>& v2){
+  return cross(v1, v2) / v1.length() / v2.length();
+}
+template <class T>
+T tan(const Vector2<T>& v1, const Vector2<T>& v2){
+  return sin(v1, v2) / cos(v1, v2);
+}
+template <class T>
+T angle(const Vector2<T>& v1, const Vector2<T>& v2){
+  return std::acos(cos(v1, v2));
+}
+
 template <class T>
 T dot(const Vector2<T>& v1, const Vector2<T>& v2){
   return v1.dot(v2);
@@ -287,6 +307,26 @@ class Vector3{
 template <class T>
 Vector3<T> operator * (T s, const Vector3<T>& v){
   return Vector3<T>(s * v.x, s * v.y, s * v.z);
+}
+
+/********************************************************
+ Basic Trig functions of angle between vectors
+********************************************************/
+template <class T>
+T cos(const Vector3<T>& v1, const Vector3<T>& v2){
+  return dot(v1, v2) / v1.length() / v2.length();
+}
+template <class T>
+T sin(const Vector3<T>& v1, const Vector3<T>& v2){
+  return cross(v1, v2).length() / v1.length() / v2.length();
+}
+template <class T>
+T tan(const Vector3<T>& v1, const Vector3<T>& v2){
+  return sin(v1, v2) / cos(v1, v2);
+}
+template <class T>
+T angle(const Vector3<T>& v1, const Vector3<T>& v2){
+  return std::acos(cos(v1, v2));
 }
 
 template <class T>
