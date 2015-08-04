@@ -6,7 +6,7 @@ using std::endl;
 
 int main(){
  Vector2<double> Vec2(1, 1);
- Vector3<double> Vec3(1, 2, 1);
- cout << Vec3 << endl;
+ Vector3<double> a(1, 0, 0), b(0, 2, 0);
+ cout << cross(a, b * 0.5) << endl;
  return 0;
 }

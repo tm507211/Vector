@@ -169,6 +169,113 @@ class Vector3{
   bool operator != (const Vector3<T>& v) const{
     return x != v.x || y != v.y || z != v.z;
   }
+
+  /**********************************************
+    Indexing operator
+  **********************************************/
+  T& operator [] (int i){
+    return *(&x + i);
+  }
+  const T operator [] (int i) const{
+    return *(&x + i);
+  }
+
+  /*********************************************
+    Non modifying math operators
+  *********************************************/
+  Vector3<T> operator - () const{
+    return Vector3<T>(-x, -y, -z);
+  }
+  Vector3<T> operator + (const Vector3<T>& v) const{
+    return Vector3<T>(x + v.x, y + v.y, z + v.z);
+  }
+  Vector3<T> operator - (const Vector3<T>& v) const{
+    return Vector3<T>(x - v.x, y - v.y, z - v.z);
+  }
+  Vector3<T> operator * (const T& s) const{
+    return Vector3<T>(x * s, y * s, z * s);
+  }
+  Vector3<T> operator * (const Vector3<T>& v) const{
+    return Vector3<T>(x * v.x, y * v.y, z * v.z);
+  }
+  Vector3<T> operator / (const T& s) const{
+    return Vector3<T> (x / s, y / s, z / s);
+  }
+
+  /*******************************************
+    Modifying Math Operators
+  *******************************************/
+  Vector3<T>& operator += (const Vector3<T>& v){
+    x += v.x;
+    y += v.y;
+    z += v.z;
+    return *this;
+  }
+  Vector3<T>& operator -= (const Vector3<T>& v){
+    x -= v.x;
+    y -= v.y;
+    y -= v.z;
+    return *this;
+  }
+  Vector3<T>& operator *= (const T& s){
+    x *= s;
+    y *= s;
+    z *= s;
+    return *this;
+  }
+  Vector3<T>& operator *= (const Vector3<T>& v){
+    x *= v.x;
+    y *= v.y;
+    z *= v.z;
+    return *this;
+  }
+  Vector3<T>& operator /= (const T& s){
+    x /= s;
+    y /= s;
+    z /= s;
+    return *this;
+  }
+
+  /*******************************************
+    Cast to T* (lets you use vec2 as T array)
+  *******************************************/
+  operator const T* () const{
+    return static_cast<T*>(&x);
+  }
+  operator T* (){
+    return static_cast<T*>(&x);
+  }
+
+  /********************************************
+    Useful Vector Operations
+  ********************************************/
+  T length() const {
+    return std::sqrt(x * x + y * y + z * z);
+  }
+  T lengthSq() const {
+    return x * x + y * y + z * z;
+  }
+  Vector3<T>& normalize(){
+    T length = this->length();
+    x /= length;
+    y /= length;
+    z /= length;
+    return *this;
+  }
+  Vector3<T> unit() const{
+    T length = length();
+    return Vector3<T>(x / length, y / length, z / length);
+  }
+  T dot(const Vector3<T>& v) const{
+    return x * v.x + y * v.y + z * v.z;
+  }
+ Vector3<T> cross(const Vector3<T>& v){ /* NOTE this function modifies the vector unlike 2D and non-member versions */
+    T x_(x), y_(y), z_(z);
+    x = y_*v.z - z_*v.y;
+    y = z_*v.x - x_*v.z;
+    z = x_*v.y - y_*v.x;
+    return *this;
+  }
 };
 
 template <class T>
@@ -177,7 +284,7 @@ T dot(const Vector3<T>& v1, const Vector3<T>& v2){
 }
 template <class T>
 Vector3<T> cross(const Vector3<T>& v1, const Vector3<T>& v2){
- return v1.cross(v2);
+ return Vector3<T>(v1.y*v2.z - v1.z*v2.y, v1.z*v2.x - v1.x*v2.z, v1.x*v2.y-v1.y*v2.x);
 }
 
 template <class T>
