@@ -130,6 +130,11 @@ class Vector2{
 };
 
 template <class T>
+Vector2<T> operator * (T s, const Vector2<T>& v){
+  return Vector2<T>(s * v.x, s * v.y);
+}
+
+template <class T>
 T dot(const Vector2<T>& v1, const Vector2<T>& v2){
   return v1.dot(v2);
 }
@@ -161,6 +166,7 @@ class Vector3{
 
   Vector3(const T& s = T()):x(s), y(s), z(s){}
   Vector3(const T& x, const T& y, const T& z):x(x), y(y), z(z){}
+  Vector3(const Vector2<T>& v, const T& s = T()):x(v.x), y(v.y), z(s){}
   Vector3(const Vector3<T>& v):x(v.x), y(v.y), z(v.z){}
 
   bool operator == (const Vector3<T>& v) const{
@@ -277,6 +283,11 @@ class Vector3{
     return *this;
   }
 };
+
+template <class T>
+Vector3<T> operator * (T s, const Vector3<T>& v){
+  return Vector3<T>(s * v.x, s * v.y, s * v.z);
+}
 
 template <class T>
 T dot(const Vector3<T>& v1, const Vector3<T>& v2){
